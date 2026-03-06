@@ -615,19 +615,29 @@
                         method: 'POST',
                         body: formData
                     });
-                    const result = await resp.json();
-                    if (result && result.ok) {
+                    // Read raw text first so we can show useful error payloads
+                    const raw = await resp.text();
+                    let result = null;
+                    try {
+                        result = JSON.parse(raw);
+                    } catch (e) {
+                        // not JSON — keep raw text
+                    }
+
+                    if (resp.ok && result && result.ok) {
                         tgStatus.textContent = 'Надіслано ✅';
                         tgStatus.style.color = '#10b981';
-                        // Clear file input after successful send
                         if (fileInput) fileInput.value = '';
                     } else {
-                        tgStatus.textContent = (result && result.error) ? `Помилка: ${result.error}` : 'Помилка при надсиланні.';
+                        const errMsg = (result && result.error) ? result.error : (raw || `${resp.status} ${resp.statusText}`);
+                        tgStatus.textContent = `Помилка: ${errMsg}`;
                         tgStatus.style.color = '#ef4444';
+                        console.error('Telegram send error:', resp.status, resp.statusText, result || raw);
                     }
                 } catch (err) {
-                    tgStatus.textContent = 'Помилка мережі.';
+                    tgStatus.textContent = `Помилка мережі: ${err.message}`;
                     tgStatus.style.color = '#ef4444';
+                    console.error('Network error sending to /send-telegram:', err);
                 }
             });
         }

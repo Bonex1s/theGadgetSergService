@@ -18,6 +18,12 @@ const upload = multer({ dest: 'uploads/' });
 
 app.use(express.json());
 
+// Debug middleware: log incoming requests (method, url, origin, content-type)
+app.use((req, res, next) => {
+  console.log(`--> ${req.method} ${req.url} Origin:${req.headers.origin || '-'} Content-Type:${req.headers['content-type'] || '-'} `);
+  next();
+});
+
 // Serve static files from this folder (so you can open the site from same origin)
 app.use(express.static(path.join(__dirname)));
 
