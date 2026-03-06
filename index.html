@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ремонт техніки | Професійний сервіс</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50px, -50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+            letter-spacing: -2px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--white);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            font-weight: 700;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .service-description {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--dark);
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+        }
+
+        .contact-item-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-item-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .contact-item-text {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .contact-item a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-item a:hover {
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: rgba(255,255,255,0.6);
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title,
+            .contact-title {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating Animation */
+        @keyframes float-icon {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float-icon 3s ease-in-out infinite;
+        }
+        /* Contact steps box */
+        .contact-steps {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            color: rgba(255,255,255,0.95);
+            text-align: left;
+        }
+
+        /* Print overlay */
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="logo">🔧 theGadgetSevice</h1>
+            <p class="tagline">Ремонт техніки та друк документів</p>
+            <a href="#services" class="cta-button">Наші послуги</a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="services" id="testimonials" style="background:linear-gradient(180deg, rgba(250,250,250,0.0), rgba(248,250,252,1)); padding-top:2rem;">
+        <h2 class="section-title fade-in">Відгуки клієнтів</h2>
+        <div style="max-width:1000px; margin:1.5rem auto; display:flex; gap:1rem; overflow:auto; padding-bottom:1rem;">
+            <div class="service-card fade-in" style="min-width:280px; flex:0 0 320px;">
+                <h4 style="margin-bottom:0.5rem;">Швидкий та якісний сервіс</h4>
+                <p style="color:var(--gray);">«Привів ноутбук після падіння, через день все працювало як нове. Дякую!»</p>
+                <div style="margin-top:0.8rem; color:var(--primary); font-weight:700;">— Олександр</div>
+            </div>
+            <div class="service-card fade-in" style="min-width:280px; flex:0 0 320px;">
+                <h4 style="margin-bottom:0.5rem;">Друк фотографій</h4>
+                <p style="color:var(--gray);">«Замовляла друк фото — кольори насичені, якість відмінна.»</p>
+                <div style="margin-top:0.8rem; color:var(--primary); font-weight:700;">— Марія</div>
+            </div>
+            <div class="service-card fade-in" style="min-width:280px; flex:0 0 320px;">
+                <h4 style="margin-bottom:0.5rem;">Доступні ціни</h4>
+                <p style="color:var(--gray);">«Хороший баланс ціни та якості. Рекомендую.»</p>
+                <div style="margin-top:0.8rem; color:var(--primary); font-weight:700;">— Іван</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title fade-in">Що ми робимо</h2>
+        <div class="services-grid">
+            <div class="service-card fade-in">
+                <span class="service-icon floating">📱</span>
+                <h3 class="service-title">Ремонт телефонів</h3>
+                <p class="service-description">
+                    Діагностика та ремонт смартфонів усіх моделей. Заміна екранів, акумуляторів, роз'ємів та інших компонентів.
+                </p>
+            </div>
+            <div class="service-card fade-in">
+                <span class="service-icon floating" style="animation-delay: 0.2s;">💻</span>
+                <h3 class="service-title">Ремонт комп'ютерів</h3>
+                <p class="service-description">
+                    Налаштування, ремонт та модернізація ПК і ноутбуків. Встановлення програм, очищення від вірусів.
+                </p>
+            </div>
+            <div class="service-card fade-in">
+                <span class="service-icon floating" style="animation-delay: 0.4s;">⌚</span>
+                <h3 class="service-title">Ремонт техніки</h3>
+                <div style="position:absolute;inset:0;cursor:pointer;" aria-hidden="true" data-service="Ремонт техніки"></div>
+                <p class="service-description">
+                    Ремонт планшетів, годинників, навушників та іншої електроніки. Будь-яка техніка — ми впораємось!
+                </p>
+            </div>
+            <div class="service-card fade-in">
+                <span class="service-icon floating" style="animation-delay: 0.6s;">🖨️</span>
+                <h3 class="service-title">Друк на папері</h3>
+                <div style="position:absolute;inset:0;cursor:pointer;" aria-hidden="true" data-service="Друк на папері"></div>
+                <p class="service-description">
+                    Друк документів, фотографій, візиток. Кольоровий та ч/б друк високої якості.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2 class="contact-title fade-in">Зв'яжіться з нами</h2>
+            <div class="contact-info">
+                <div class="contact-item fade-in">
+                    <span class="contact-item-icon">📞</span>
+                    <div class="contact-item-title">Телефон</div>
+                    <div class="contact-item-text">
+                        <a href="tel:+380507261192">+380 50 726 11 92</a>
+                    </div>
+                </div>
+                <div class="contact-item fade-in">
+                    <span class="contact-item-icon">✉️</span>
+                    <div class="contact-item-title">Електрона пошта</div>
+                    <div class="contact-item-text">
+                        <a href="mailto:info@techfix.ru">bonex1@ukr.net</a>
+                    </div>
+                </div>
+                <div class="contact-item fade-in">
+                    <span class="contact-item-icon">📍</span>
+                    <div class="contact-item-title">Адреса</div>
+                    <div class="contact-item-text">
+                        вулиця 600-річчя, 17Е, Вінниця, Вінницька область, 21000
+                    </div>
+                </div>
+            </div>
+            <div id="contact-steps" class="contact-steps" style="display:none;">
+                <strong id="contact-steps-title">Як зв'язатися:</strong>
+                <ol style="margin-top:0.5rem; color:rgba(255,255,255,0.85);">
+                    <li>Зателефонуйте або надішліть повідомлення: <a href="tel:+79991234567" style="color:rgba(255,255,255,0.9);">+380507261192</a>.</li>
+                    <li>Опишіть проблему і, якщо можливо, надішліть фото/відео на <a href="mailto:info@techfix.ru" style="color:rgba(255,255,255,0.9);">Bonex1@ukr.net</a> або в месенджер.</li>
+                    <li>Ми узгодимо вартість і строки, після чого ви можете привезти техніку або замовити кур'єрський виїзд.</li>
+                </ol>
+                <div style="margin-top:0.6rem; color:rgba(255,255,255,0.8); font-size:0.95rem;">Ви обрали: <span id="contact-selected-service" style="font-weight:700;"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Print Section (hidden until requested) -->
+    <section id="print-section" class="services" style="display:none; padding-bottom:2rem;">
+        <h2 class="section-title fade-in">Друк</h2>
+        <div style="max-width:820px; margin:1.5rem auto;">
+            <div class="service-card">
+                <label for="print-format" style="display:block; font-weight:700; margin-bottom:0.5rem;">Оберіть формат друку</label>
+                <select id="print-format" style="width:100%; padding:0.75rem; border-radius:10px; border:1px solid #e2e8f0; font-weight:600;">
+                    <option value="A4">A4 (210×297 мм)</option>
+                    <option value="A3">A3 (297×420 мм)</option>
+                    <option value="PHOTO_3x4">Фото 3×4 см</option>
+                    <option value="PHOTO_10x15">Фото 10×15 см</option>
+                    <option value="CUSTOM">Інший формат</option>
+                </select>
+                <div style="margin-top:0.75rem; display:grid; grid-template-columns:1fr 100px; gap:0.5rem; align-items:start;">
+                    <div>
+                        <label for="paper-type" style="display:block; font-weight:700; margin-bottom:0.4rem;">Тип паперу</label>
+                        <select id="paper-type" style="width:100%; padding:0.6rem; border-radius:8px; border:1px solid #e2e8f0; font-weight:600;">
+                            <option value="regular">Звичайний</option>
+                            <option value="glossy">Фото (глянець)</option>
+                            <option value="matte">Фото (матовий)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="print-qty" style="display:block; font-weight:700; margin-bottom:0.4rem;">Кількість</label>
+                        <input id="print-qty" type="number" min="1" value="1" style="width:100%; padding:0.55rem; border-radius:8px; border:1px solid #e2e8f0; font-weight:600;" />
+                    </div>
+                </div>
+                <div style="margin-top:0.75rem;">
+                    <label for="print-file" style="display:block; font-weight:700; margin-bottom:0.4rem;">Завантажити файл для друку</label>
+                    <input id="print-file" type="file" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx" style="width:100%; padding:0.5rem; border-radius:8px; border:1px solid #e2e8f0;" />
+                    <small style="color:var(--gray); display:block; margin-top:0.25rem;">PDF, JPG, PNG, DOC, DOCX</small>
+                </div>
+                <div style="margin-top:1rem; display:flex; gap:0.5rem;">
+                    <button id="send-telegram" class="cta-button" style="flex:1; background:#10b981; color:#fff;">Надіслати в Telegram</button>
+                    <button id="print-close" class="cta-button" style="flex:1; background:#fff; color:var(--dark);">Закрити</button>
+                </div>
+                <div id="tg-status" style="margin-top:0.5rem; text-align:center; color:var(--gray); font-size:0.95rem;">&nbsp;</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Floating Chat Button & Panel -->
+    <div id="chat-button" style="position:fixed; right:18px; bottom:18px; z-index:11000;">
+        <button id="open-chat" class="cta-button" style="border-radius:50%; width:56px; height:56px; display:flex; align-items:center; justify-content:center; font-size:1.25rem;">💬</button>
+    </div>
+
+    <div id="chat-panel" aria-hidden="true" style="position:fixed; right:18px; bottom:86px; width:340px; max-width:90vw; z-index:11000; display:none;">
+        <div style="background:var(--white); border-radius:12px; box-shadow:0 15px 40px rgba(2,6,23,0.2); overflow:hidden;">
+            <div style="background:linear-gradient(90deg,var(--primary),var(--secondary)); color:#fff; padding:0.8rem 1rem; display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-weight:700;">Чат підтримки</div>
+                <button id="close-chat" style="background:transparent; border:none; color:#fff; font-size:1.1rem; cursor:pointer;">✖</button>
+            </div>
+            <div style="padding:0.75rem; max-height:240px; overflow:auto;" id="chat-messages">
+                <div style="color:var(--gray); font-size:0.95rem;">Привіт! Залиште повідомлення, і ми відповімо якнайшвидше.</div>
+            </div>
+            <div style="padding:0.75rem; border-top:1px solid #eef2ff; background:#fbfdff;">
+                <input id="chat-name" placeholder="Ваше ім'я (опціонально)" style="width:100%; padding:0.5rem; border-radius:8px; border:1px solid #e6eefc; margin-bottom:0.5rem;" />
+                <textarea id="chat-text" placeholder="Напишіть повідомлення..." rows="3" style="width:100%; padding:0.5rem; border-radius:8px; border:1px solid #e6eefc;"></textarea>
+                <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                    <button id="chat-send" class="cta-button" style="flex:1; background:var(--primary); color:#fff;">Відправити</button>
+                    <button id="chat-clear" class="cta-button" style="flex:0 0 86px; background:#fff; color:var(--dark);">Очистити</button>
+                </div>
+                <div id="chat-status" style="margin-top:0.5rem; font-size:0.9rem; color:var(--gray);"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2026 theGadget. Всі права захищені.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add parallax effect to hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                hero.style.opacity = 1 - scrolled / window.innerHeight;
+            }
+        });
+
+        // Add click animation to CTA button
+        document.querySelectorAll('.cta-button').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Service card clicks (data-service)
+        document.querySelectorAll('[data-service]').forEach(el => {
+            el.addEventListener('click', function () {
+                const service = this.getAttribute('data-service') || 'Послуга';
+                const contact = document.querySelector('#contact');
+                const steps = document.getElementById('contact-steps');
+                const sel = document.getElementById('contact-selected-service');
+                const printSection = document.getElementById('print-section');
+
+                // If user clicked on print service — open print section
+                if (service === 'Друк на папері') {
+                    if (steps) steps.style.display = 'none';
+                    if (printSection) {
+                        printSection.style.display = 'block';
+                        printSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    return;
+                }
+
+                // Otherwise show contact steps
+                if (sel) sel.textContent = service;
+                if (steps) steps.style.display = 'block';
+                if (contact) {
+                    contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+
+        // Close/hide print section button
+        const printCloseBtn = document.getElementById('print-close');
+        const printSection = document.getElementById('print-section');
+        if (printCloseBtn && printSection) {
+            printCloseBtn.addEventListener('click', () => {
+                printSection.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Telegram sending logic (client -> server endpoint)
+        const sendTgBtn = document.getElementById('send-telegram');
+        const tgStatus = document.getElementById('tg-status');
+
+        function paperLabel(code) {
+            switch (code) {
+                case 'regular': return 'Звичайний';
+                case 'glossy': return 'Фото (глянець)';
+                case 'matte': return 'Фото (матовий)';
+                default: return code;
+            }
+        }
+
+        if (sendTgBtn) {
+            sendTgBtn.addEventListener('click', async () => {
+                const format = (document.getElementById('print-format') || {}).value || '';
+                const paper = (document.getElementById('paper-type') || {}).value || '';
+                const qty = (document.getElementById('print-qty') || {}).value || '1';
+                const fileInput = document.getElementById('print-file');
+                const file = fileInput && fileInput.files && fileInput.files[0];
+
+                tgStatus.textContent = 'Надсилається...';
+                tgStatus.style.color = 'var(--gray)';
+
+                try {
+                    const formData = new FormData();
+                    formData.append('format', format);
+                    formData.append('paper', paperLabel(paper));
+                    formData.append('qty', qty);
+                    if (file) {
+                        formData.append('file', file);
+                    }
+
+                    const resp = await fetch('/send-telegram', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const result = await resp.json();
+                    if (result && result.ok) {
+                        tgStatus.textContent = 'Надіслано ✅';
+                        tgStatus.style.color = '#10b981';
+                        // Clear file input after successful send
+                        if (fileInput) fileInput.value = '';
+                    } else {
+                        tgStatus.textContent = (result && result.error) ? `Помилка: ${result.error}` : 'Помилка при надсиланні.';
+                        tgStatus.style.color = '#ef4444';
+                    }
+                } catch (err) {
+                    tgStatus.textContent = 'Помилка мережі.';
+                    tgStatus.style.color = '#ef4444';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
